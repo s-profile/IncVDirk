@@ -1,5 +1,4 @@
 import time, os, dictionary, colorama
-from goto import with_goto
 
 newLine = print('\n')
 
@@ -94,31 +93,31 @@ def checkFileSettings(settingsExistanceValue):
 
         return colorString, speedString
 
-@with_goto
+
 def chooseSpeed():
 
     time.sleep(0.5)
 
     dictionary.stylishPrint(dictionary.chooseSpeedAlert, 0.025, False)
     print('\n')
-    label .firstCycle
-    speedInput = input('->>>')
 
-    while True:
-        try:
-            speedInput = float(speedInput)
-        except ValueError:
-            print('Введите число (0.1 - 2)\n')
-            speedInput = input('->>>')
-        else:
-            while speedInput < 0.1 or speedInput > 2:
-                print('Введите число (0.1 - 2)\n')
-                goto .firstCycle
-            break
+    def checkFloat():
+        speedInput = input('->>>')
+        while True:
+            try:
+                speedInput = float(speedInput)
+            except ValueError:
+                return False
+            else:
+                if speedInput >= 0.1 and speedInput <= 2:
+                    return speedInput
+                else:
+                    return False
 
+    CF = checkFloat()
 
-    return speedInput
-
-
-
-
+    while CF == False:
+        print('Введите число (0.1 - 2)\n')
+        CF = checkFloat()
+    else:
+        return CF
