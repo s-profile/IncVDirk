@@ -1,11 +1,11 @@
 import colorama, time, loadingpy, dictionary, sys
-from goto import with_goto
 colorama.init()
 
 
 def mainMenu(colorArg, speedArg, index, NonExecutableColor):
 
     NonExecutableColorInner = NonExecutableColor
+
 
     colorama.init()
 
@@ -144,38 +144,43 @@ def mainMenu(colorArg, speedArg, index, NonExecutableColor):
             dictionary.colorStylishPrint(dictionary.chooseSpeedAlert2, speedArg * 0.025, False, colorArg)
             print('\n')
 
-            @with_goto
-            def checkFloat(nonExe):
-                label .firstCycle
-                speedInput = input('->>>')
 
+            def checkFloat():
+                speedInput = input('->>>')
                 while True:
                     try:
                         speedInput = float(speedInput)
                     except ValueError:
-                        print('Введите число (0.1 - 2)\n')
-                        speedInput = input('->>>')
+                        return False
                     else:
-                        while speedInput < 0.1 or speedInput > 2:
-                            print('Введите число (0.1 - 2)\n')
-                            goto .firstCycle
-                        speedArg = speedInput
-                        funcCreateFileSave = open('settings.txt', 'w')
-                        funcCreateFileSave.write(nonExe + '\n' + str(speedArg))
-                        funcCreateFileSave.close()
+                        if speedInput >= 0.1 and speedInput <= 2:
+                            return speedInput
+                        else:
+                            return False
 
-                        readFile1 = open('settings.txt', 'r')
-                        readArg = readFile1.readlines()
-                        readArg = readArg[1]
-                        speedArg = readArg
-                        speedArg = float(speedArg)
-                        readFile1.close()
-                        print('\n')
-                        mainMenu(colorArg, speedArg, 1, NonExecutableColorInner)
+            CF = checkFloat()
 
-            checkFloat(NonExecutableColorInner)
+            while CF == False:
+                print('Введите число (0.1 - 2)\n')
+                CF = checkFloat()
+            else:
+                speedArg2 = CF
 
-    elif mainMenuComand == '5':
-        dictionary.colorStylishPrint(dictionary.bye, speedArg * 0.075, True, colorArg)
-        time.sleep(3.5)
-        sys.exit()
+                readFile2 = open('settings.txt', 'r')
+                readArg2 = readFile2.readlines()
+                colorArgInner = readArg2[0]
+                colorArgInner = colorArgInner.replace('\n', '')
+                colorArg2 = eval(colorArgInner)
+                readFile2.close()
+
+                funcCreateFileSave = open('settings.txt', 'w')
+                funcCreateFileSave.write(colorArgInner + '\n' + str(speedArg2))
+                funcCreateFileSave.close()
+
+                mainMenu(colorArg2, speedArg2, 1, str(colorArgInner))
+
+
+        elif mainMenuComand == '5':
+            dictionary.colorStylishPrint(dictionary.bye, speedArg * 0.075, True, colorArg)
+            time.sleep(3.5)
+            sys.exit()
