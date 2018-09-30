@@ -11,6 +11,6 @@ Game will automatically create settings.txt and save.txt
 ### Source code
 Source code is located in "Source" folder. To run it on your PC you should install Python(3.6) and following modules:
 
-    `colorama, random, datetime, goto_statement`
+    `colorama, datetime`
     
 You can do it via `pip install`
